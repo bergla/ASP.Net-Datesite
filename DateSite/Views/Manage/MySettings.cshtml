@@ -1,0 +1,47 @@
+﻿@model DateSite.Models.MyAccountModel
+
+@{
+    ViewBag.Title = "My account settings";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    @Styles.Render("~/Content/Settings.css");
+}
+
+
+<div class="container content-wrapper">
+    <div class="col-md-12 pw">
+
+
+    @if (Session["UserID"] != null)
+    {
+        <div class="form-bg">
+            <div class="stretch">
+                <h2 class="container">Change account password</h2>
+            </div>
+
+            @using (Html.BeginForm())
+            {
+            @Html.ValidationSummary(true)
+
+            @Html.LabelFor(x => x.OLDPASSWORD, new { @class = "change-tb" })
+            @Html.TextBoxFor(x => x.OLDPASSWORD, new { @class = "shita-tb" })
+            @Html.ValidationMessageFor(x => x.OLDPASSWORD)
+            @Html.LabelFor(x => x.PASSWORD, new { @class = "change-tb" })
+            @Html.TextBoxFor(x => x.PASSWORD, new { @class = "shita-tb" })
+            @Html.ValidationMessageFor(x => x.PASSWORD)
+            @Html.LabelFor(x => x.PASSWORDMATCH, new { @class = "change-tb" })
+            @Html.TextBoxFor(x => x.PASSWORDMATCH, new { @class = "shita-tb" })
+            @Html.ValidationMessageFor(x => x.PASSWORDMATCH)
+            <input type="submit" value="Save" id="saveBtn" />
+            }
+        </div>
+    }
+    else
+    {
+        <p>Not Logged In</p>
+    }
+
+    </div>
+
+</div>
+
+<script type="text/javascript" src="@Url.Content("/Scripts/mprofile.js")"></script>

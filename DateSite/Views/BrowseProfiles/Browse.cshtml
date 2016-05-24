@@ -1,0 +1,61 @@
+﻿@model DateSite.Models.BrowseModel
+
+@{
+    ViewBag.Title = "Browse Profiles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    @Styles.Render("~/Content/browseStyle.css");
+
+}
+
+
+<head>
+    <script src="~/scripts/jquery-1.10.2.js"></script>
+    <script>
+        $(document).ready(function () {
+
+            $("#searchBtn").click(function () {
+                $('.profilebox').remove(); //tar bort alla visade användare, för att sedan fylla på med användare med matchande sökkriterie 
+                                           // ([HttpPost] Browse i BrowseProfilesController)
+            });
+        });
+    </script>
+</head>
+
+<div class="container">
+   
+        <div class="row search-row">
+            <div class="col-md-12">
+
+                @using (Html.BeginForm())
+                { 
+                    <input type="text" name="searchtext" placeholder="Search any name..." />
+                    <input type="submit" value="Search" id="searchBtn" />
+                }
+
+            </div>
+        </div>
+
+</div>
+<hr />
+
+<div class="row profiles">
+    <div class="col-md-2"></div>
+        <div class="col-md-8 clearfix profilecontainer">
+
+            <div class="row profile-row">
+                @foreach (var i in Model.profiles)
+            {
+                    <a href='@Url.Action("BrowseUser", "BrowseProfiles" , new { id = @i.Id })'>
+                        <div class="col-md-2 profile hvr-shrink" style="background-image: url(../../Content/ProfileImages/@i.Pic); background-size: 100% 100%;">
+                            <div class="profile-text">
+                                <p>@i.Firstname</p>
+                                <p>@i.Gender @i.Age</p>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+
+        </div>
+    <div class="col-md-2"></div>
+    </div>
