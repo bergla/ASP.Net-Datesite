@@ -46,7 +46,7 @@
                 @foreach (var i in Model.profiles)
             {
                     <a href='@Url.Action("BrowseUser", "BrowseProfiles" , new { id = @i.Id })'>
-                        <div class="col-md-2 profile hvr-shrink" style="background-image: url(../../Content/ProfileImages/@i.Pic); background-size: 100% 100%;">
+                        <div class="col-md-2 profile hvr-grow" style="background-image: url(../../Content/ProfileImages/@i.Pic); background-size: 100% 100%;">
                             <div class="profile-text">
                                 <p>@i.Firstname</p>
                                 <p>@i.Gender @i.Age</p>
